@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatTypes;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,22 +16,25 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name= "tb_order")
+@Table(name = "tb_order")
 public class Order implements Serializable {
-	
+
 	private static final long serialVersionID = 1L;
-	
-	@Id 
+
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private Instant moment ;
-	
-	@ManyToOne //Estabelece a relação entre as duas tabelas
-	@JoinColumn(name ="client_id") // mapea o campo que sera guardado a chave estrangeira
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
+	private Instant moment;
+
+	@ManyToOne // Estabelece a relação entre as duas tabelas
+	@JoinColumn(name = "client_id") // mapea o campo que sera guardado a chave estrangeira
 	private User client;
-	
-	public Order() {}
-	
+
+	public Order() {
+	}
+
 	public Order(Long id, Instant moment, User user) {
 		super();
 		this.id = id;
@@ -81,6 +87,5 @@ public class Order implements Serializable {
 	public String toString() {
 		return "Order [id=" + id + ", moment=" + moment + ", client=" + client + "]";
 	}
-	
-	
+
 }
