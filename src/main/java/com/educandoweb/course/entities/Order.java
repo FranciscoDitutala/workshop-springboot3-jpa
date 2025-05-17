@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
+import com.educandoweb.course.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatTypes;
 
@@ -31,14 +32,17 @@ public class Order implements Serializable {
 	@ManyToOne // Estabelece a relação entre as duas tabelas
 	@JoinColumn(name = "client_id") // mapea o campo que sera guardado a chave estrangeira
 	private User client;
+	
+	private OrderStatus orderStatus;
 
 	public Order() {
 	}
 
-	public Order(Long id, Instant moment, User user) {
+	public Order(Long id, Instant moment,OrderStatus orderStatus, User user) {
 		super();
 		this.id = id;
 		this.moment = moment;
+		this.orderStatus = orderStatus;
 		this.client = user;
 	}
 
@@ -64,6 +68,14 @@ public class Order implements Serializable {
 
 	public void setUser(User client) {
 		this.client = client;
+	}
+	
+	public OrderStatus getOrderStatus() {
+		return orderStatus;
+	}
+
+	public void setOrderStatus(OrderStatus orderStatus) {
+		this.orderStatus = orderStatus;
 	}
 
 	@Override
