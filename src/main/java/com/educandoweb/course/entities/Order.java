@@ -38,7 +38,7 @@ public class Order implements Serializable {
 	
 	private Integer orderStatus;
 	
-	@OneToMany(mappedBy = "id.order") //estabele-ce a relação com a tabela OrdemItem referenciando o order do id obtido por ser uma ordemItemPK
+	@OneToMany(mappedBy = "id.order") //estabele-ce a relação com a tabela OrdemItem referenciando o order do "id" obtido por ser uma ordemItemPK
 	private Set<OrderItem> items = new HashSet<>();
 
 	public Order() {
