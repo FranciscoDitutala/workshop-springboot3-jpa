@@ -27,7 +27,6 @@ public class OrderItemPK implements Serializable {
 	@JoinColumn(name = "product_id") //Deve ser igual ao ID que está na tabela product
 	private Product product;
 	
-	
 	public Order getOrder() {
 		return order;
 	}
