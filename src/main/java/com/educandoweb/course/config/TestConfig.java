@@ -2,6 +2,7 @@ package com.educandoweb.course.config;
 
 import java.time.Instant;
 import java.util.Arrays;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.Profile;
 import com.educandoweb.course.entities.Category;
 import com.educandoweb.course.entities.Order;
 import com.educandoweb.course.entities.OrderItem;
+import com.educandoweb.course.entities.Payment;
 import com.educandoweb.course.entities.Product;
 import com.educandoweb.course.entities.User;
 import com.educandoweb.course.entities.enums.OrderStatus;
@@ -81,6 +83,10 @@ public class TestConfig implements CommandLineRunner {
 		
 		
 		itemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
+		
+		Payment payment1 =new Payment(null,Instant.parse("2020-06-20T21:53:07Z"),o1);
+		o1.setPayment(payment1);
+		orderRepository.save(o1);
 		
 	}
 
